@@ -47,7 +47,7 @@ const HeroSection = () => {
 
             <div className="animate-fade-in animate-delay-400">
               <a
-                href="/#about"
+                href="#about"
                 onClick={(e) => handleHashLinkClick(e, 'about')}
               >
                 <Button className="bg-portfolioPurple hover:bg-portfolioAccent text-white">
@@ -73,7 +73,7 @@ const HeroSection = () => {
 
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-subtle">
         <a
-          href="/#about"
+          href="#about"
           className="text-portfolioNavy opacity-80 flex flex-col items-center"
           onClick={(e) => handleHashLinkClick(e, 'about')}
         >
