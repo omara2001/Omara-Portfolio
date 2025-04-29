@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, ArrowDown } from "lucide-react";
+import { handleHashLinkClick } from '@/lib/scrollUtils';
 
 const HeroSection = () => {
   return (
@@ -45,7 +46,10 @@ const HeroSection = () => {
             </div>
 
             <div className="animate-fade-in animate-delay-400">
-              <a href="#about">
+              <a
+                href="/#about"
+                onClick={(e) => handleHashLinkClick(e, 'about')}
+              >
                 <Button className="bg-portfolioPurple hover:bg-portfolioAccent text-white">
                   Learn More
                   <ArrowDown className="ml-2 h-4 w-4" />
@@ -68,7 +72,11 @@ const HeroSection = () => {
       </div>
 
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-subtle">
-        <a href="#about" className="text-portfolioNavy opacity-80 flex flex-col items-center">
+        <a
+          href="/#about"
+          className="text-portfolioNavy opacity-80 flex flex-col items-center"
+          onClick={(e) => handleHashLinkClick(e, 'about')}
+        >
           <span className="text-sm mb-2">Scroll Down</span>
           <ArrowDown className="h-5 w-5" />
         </a>
