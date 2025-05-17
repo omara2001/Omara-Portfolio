@@ -25,36 +25,47 @@ const HeroSection = () => {
             </p>
 
             <div className="flex gap-4 mb-8 animate-fade-in animate-delay-300">
-              <a href="https://github.com/omara2001" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="icon" className="rounded-full">
-                  <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </Button>
-              </a>
-              <a href="https://www.linkedin.com/in/mohamed-omara-aa351520b/" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" size="icon" className="rounded-full">
-                  <Linkedin className="h-5 w-5" />
-                  <span className="sr-only">LinkedIn</span>
-                </Button>
-              </a>
-              <a href="mailto:madayasser6@gmail.com">
-                <Button variant="outline" size="icon" className="rounded-full">
-                  <Mail className="h-5 w-5" />
-                  <span className="sr-only">Email</span>
-                </Button>
-              </a>
+              <div className="inline-block">
+                <a href="https://github.com/omara2001" target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button variant="outline" size="icon" className="rounded-full">
+                    <Github className="h-5 w-5" />
+                    <span className="sr-only">GitHub</span>
+                  </Button>
+                </a>
+              </div>
+              <div className="inline-block">
+                <a href="https://www.linkedin.com/in/mohamed-omara-aa351520b/" target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button variant="outline" size="icon" className="rounded-full">
+                    <Linkedin className="h-5 w-5" />
+                    <span className="sr-only">LinkedIn</span>
+                  </Button>
+                </a>
+              </div>
+              <div className="inline-block">
+                <a href="mailto:madayasser6@gmail.com" className="inline-block">
+                  <Button variant="outline" size="icon" className="rounded-full">
+                    <Mail className="h-5 w-5" />
+                    <span className="sr-only">Email</span>
+                  </Button>
+                </a>
+              </div>
             </div>
 
             <div className="animate-fade-in animate-delay-400">
-              <a
-                href="#about"
-                onClick={(e) => handleHashLinkClick(e, 'about')}
+              <Button
+                className="bg-portfolioPurple hover:bg-portfolioAccent text-white"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const aboutSection = document.getElementById('about');
+                  if (aboutSection) {
+                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, '', '#about');
+                  }
+                }}
               >
-                <Button className="bg-portfolioPurple hover:bg-portfolioAccent text-white">
-                  Learn More
-                  <ArrowDown className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
+                Learn More
+                <ArrowDown className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
 
@@ -72,14 +83,20 @@ const HeroSection = () => {
       </div>
 
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-subtle">
-        <a
-          href="#about"
-          className="text-portfolioNavy opacity-80 flex flex-col items-center"
-          onClick={(e) => handleHashLinkClick(e, 'about')}
+        <button
+          type="button"
+          className="text-portfolioNavy opacity-80 flex flex-col items-center cursor-pointer bg-transparent border-none"
+          onClick={() => {
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+              aboutSection.scrollIntoView({ behavior: 'smooth' });
+              window.history.pushState(null, '', '#about');
+            }
+          }}
         >
           <span className="text-sm mb-2">Scroll Down</span>
           <ArrowDown className="h-5 w-5" />
-        </a>
+        </button>
       </div>
     </section>
   );

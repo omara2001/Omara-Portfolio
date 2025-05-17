@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { Link } from 'react-router-dom';
 import { handleHashLinkClick } from '@/lib/scrollUtils';
 
 const Navbar = () => {
@@ -22,12 +23,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '#home', section: 'home' },
+    { name: 'About', href: '#about', section: 'about' },
+    { name: 'Skills', href: '#skills', section: 'skills' },
+    { name: 'Projects', href: '#projects', section: 'projects' },
+    { name: 'Experience', href: '#experience', section: 'experience' },
+    { name: 'Contact', href: '#contact', section: 'contact' },
   ];
 
   return (
@@ -39,26 +40,38 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a
-              href="#home"
-              className="text-portfolioNavy font-heading font-bold text-xl"
-              onClick={(e) => handleHashLinkClick(e, 'home')}
+            <button
+              type="button"
+              className="text-portfolioNavy font-heading font-bold text-xl bg-transparent border-none cursor-pointer"
+              onClick={() => {
+                const element = document.getElementById('home');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '#home');
+                }
+              }}
             >
               Mohamed<span className="text-portfolioPurple">Omara</span>
-            </a>
+            </button>
           </div>
 
           <nav className="hidden md:block">
             <ul className="flex space-x-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="nav-link text-portfolioNavy hover:text-portfolioPurple font-medium transition-colors"
-                    onClick={(e) => handleHashLinkClick(e, link.href.split('#')[1])}
+                  <button
+                    type="button"
+                    className="nav-link text-portfolioNavy hover:text-portfolioPurple font-medium transition-colors bg-transparent border-none cursor-pointer"
+                    onClick={() => {
+                      const element = document.getElementById(link.section);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        window.history.pushState(null, '', link.href);
+                      }
+                    }}
                   >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -83,16 +96,20 @@ const Navbar = () => {
           <ul className="px-4 pt-2 pb-4 space-y-2">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="block px-3 py-2 text-portfolioNavy hover:text-portfolioPurple hover:bg-gray-50 rounded-md font-medium"
-                  onClick={(e) => {
-                    handleHashLinkClick(e, link.href.split('#')[1]);
-                    setMobileMenuOpen(false);
+                <button
+                  type="button"
+                  className="block w-full text-left px-3 py-2 text-portfolioNavy hover:text-portfolioPurple hover:bg-gray-50 rounded-md font-medium bg-transparent border-none cursor-pointer"
+                  onClick={() => {
+                    const element = document.getElementById(link.section);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                      window.history.pushState(null, '', link.href);
+                      setMobileMenuOpen(false);
+                    }
                   }}
                 >
                   {link.name}
-                </a>
+                </button>
               </li>
             ))}
           </ul>

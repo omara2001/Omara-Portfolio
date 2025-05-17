@@ -7,9 +7,23 @@ export const handleHashLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targ
 
   const element = document.getElementById(id);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    // Add a small delay to ensure the DOM is ready
+    setTimeout(() => {
+      // Get the position of the element relative to the viewport
+      const rect = element.getBoundingClientRect();
 
-    // Update the URL without causing a page reload
-    window.history.pushState(null, '', `#${id}`);
+      // Calculate the absolute position on the page
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const offsetTop = rect.top + scrollTop;
+
+      // Scroll with smooth behavior
+      window.scrollTo({
+        top: offsetTop - 80, // Adjust for header height
+        behavior: 'smooth'
+      });
+
+      // Update the URL without causing a page reload
+      window.history.pushState(null, '', `#${id}`);
+    }, 10);
   }
 };
